@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Progress Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Progress Tracker</h1>
+        
+        <div class="input-section">
+            <h2>Today's To-Do List</h2>
+            <div id="todoInputContainer">
+                <input type="text" id="newTodo" placeholder="Add a new task..." autocomplete="off">
+                <button id="addBtn">+</button>
+            </div>
+            <ul id="todoList"></ul>
+            
+            <div class="summary">
+                Completed today: <strong id="completedCount">0</strong> tasks
+            </div>
+        </div>
+
+        <h2>Last 30 Days — Progress Heatmap</h2>
+        <div id="heatmap" class="heatmap"></div>
+    </div>
+
+    <script src="logic.js"></script>
+</body>
+</html>
