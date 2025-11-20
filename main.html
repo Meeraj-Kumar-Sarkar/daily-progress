@@ -2,28 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Progress Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Daily Progress Tracker</h1>
-        
-        <div class="input-section">
-            <h2>Today's To-Do List</h2>
-            <div id="todoInputContainer">
-                <input type="text" id="newTodo" placeholder="Add a new task..." autocomplete="off">
-                <button id="addBtn">+</button>
-            </div>
-            <ul id="todoList"></ul>
-            
-            <div class="summary">
-                Completed today: <strong id="completedCount">0</strong> tasks
-            </div>
-        </div>
+        <header class="header">
+            <h1>Daily Progress Tracker</h1>
+        </header>
 
-        <h2>Last 30 Days — Progress Heatmap</h2>
-        <div id="heatmap" class="heatmap"></div>
+        <main class="main-grid">
+            <!-- Left Column: Today's Tasks -->
+            <section class="tasks-section">
+                <h2>Today's Tasks — <span class="today-date"></span></h2>
+                
+                <div class="input-container">
+                    <input type="text" id="newTodo" placeholder="Add a new task..." autocomplete="off">
+                    <button id="addBtn" aria-label="Add task">+</button>
+                </div>
+
+                <ul id="todoList" class="todo-list"></ul>
+
+                <div class="summary">
+                    Completed today: <strong id="completedCount">0</strong> tasks
+                </div>
+            </section>
+
+            <!-- Right Column: Heatmap -->
+            <aside class="heatmap-section">
+                <div class="heatmap-header">
+                    <h2>30-Day Activity</h2>
+                    <span class="legend">
+                        <span>Less</span>
+                        <div class="legend-colors">
+                            <div class="block level-0"></div>
+                            <div class="block level-1"></div>
+                            <div class="block level-2"></div>
+                            <div class="block level-3"></div>
+                            <div class="block level-4"></div>
+                        </div>
+                        <span>More</span>
+                    </span>
+                </div>
+                <div class="heatmap-container">
+                    <div class="heatmap-wrapper">
+                        <div id="heatmap" class="heatmap"></div>
+                        <div class="month-labels" id="monthLabels"></div>
+                    </div>
+                </div>
+            </aside>
+        </main>
     </div>
 
     <script src="logic.js"></script>
