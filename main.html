@@ -19,6 +19,12 @@
                 
                 <div class="input-container">
                     <input type="text" id="newTodo" placeholder="Add a new task..." autocomplete="off">
+                    <input type="time" id="taskTime"/>
+                    <input type="date" id="taskDate"/>
+                    <select  id="taskType">
+                        <option value="task">Task</option>
+                        <option value="event">Timed Event</option>
+                    </select>
                     <button id="addBtn" aria-label="Add task">+</button>
                 </div>
 
@@ -50,6 +56,10 @@
                         <div id="heatmap" class="heatmap"></div>
                         <div class="month-labels" id="monthLabels"></div>
                     </div>
+                </div>
+                <div id="futureTasks" class="future-task-section">
+                    <h3>Upcoming Events</h3>
+                    <div id="futureList" class="future-list"></div>
                 </div>
             </aside>
         </main>
