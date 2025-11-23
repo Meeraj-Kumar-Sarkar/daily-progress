@@ -2,7 +2,7 @@
 const CACHE_NAME = "progress-tracker-v6";
 const ASSETS = [
   "/",
-  "/main.html",
+  "/index.html",
   "/style.css",
   "/logic.js",
   "/android-chrome-192x192.png",

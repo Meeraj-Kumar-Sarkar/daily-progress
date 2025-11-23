@@ -2,7 +2,7 @@
   "name": "Daily Progress Tracker",
   "short_name": "Progress",
   "description": "Gamified daily task tracker with streaks, XP & badges",
-  "start_url": "/main.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#0d1117",
   "theme_color": "#58a6ff",
