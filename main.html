@@ -1,70 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daily Progress Tracker</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
+    <!-- PWA: Make it installable and look like a real app -->
+    <meta name="theme-color" content="#58a6ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Progress" />
+
+    <!-- Icons (you only need these 3 files) -->
+    <link rel="icon" href="icon-192.png" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+
+    <!-- PWA Manifest (tells phones how to install your app) -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Your stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <header class="header">
-            <h1>Daily Progress Tracker</h1>
-        </header>
+      <header class="header">
+        <h1>Daily Progress Tracker</h1>
+      </header>
 
-        <main class="main-grid">
-            <!-- Left Column: Today's Tasks -->
+      <!-- Tab Navigation -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="today">Today</button>
+        <button class="tab-btn" data-tab="gamification">
+          Progress & Rewards
+        </button>
+      </nav>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- TAB 1: Today (Original Clean View) -->
+        <section id="today" class="tab-pane active">
+          <div class="main-grid">
             <section class="tasks-section">
-                <h2>Today's Tasks — <span class="today-date"></span></h2>
-                
-                <div class="input-container">
-                    <input type="text" id="newTodo" placeholder="Add a new task..." autocomplete="off">
-                    <input type="time" id="taskTime"/>
-                    <input type="date" id="taskDate"/>
-                    <select  id="taskType">
-                        <option value="task">Task</option>
-                        <option value="event">Timed Event</option>
-                    </select>
-                    <button id="addBtn" aria-label="Add task">+</button>
-                </div>
+              <h2>Today's Tasks — <span class="today-date"></span></h2>
 
-                <ul id="todoList" class="todo-list"></ul>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="newTodo"
+                  placeholder="Add a new task..."
+                  autocomplete="off"
+                />
+                <input type="time" id="taskTime" />
+                <input type="date" id="taskDate" />
+                <select id="taskType">
+                  <option value="task">Task</option>
+                  <option value="event">Timed Event</option>
+                </select>
+                <button id="addBtn" aria-label="Add task">+</button>
+              </div>
 
-                <div class="summary">
-                    Completed today: <strong id="completedCount">0</strong> tasks
-                </div>
+              <ul id="todoList" class="todo-list"></ul>
+
+              <div class="summary">
+                Completed today: <strong id="completedCount">0</strong> tasks
+              </div>
             </section>
 
-            <!-- Right Column: Heatmap -->
             <aside class="heatmap-section">
-                <div class="heatmap-header">
-                    <h2>30-Day Activity</h2>
-                    <span class="legend">
-                        <span>Less</span>
-                        <div class="legend-colors">
-                            <div class="block level-0"></div>
-                            <div class="block level-1"></div>
-                            <div class="block level-2"></div>
-                            <div class="block level-3"></div>
-                            <div class="block level-4"></div>
-                        </div>
-                        <span>More</span>
-                    </span>
+              <div class="heatmap-header">
+                <h2>30-Day Activity</h2>
+                <span class="legend">
+                  <span>Less</span>
+                  <div class="legend-colors">
+                    <div class="block level-0"></div>
+                    <div class="block level-1"></div>
+                    <div class="block level-2"></div>
+                    <div class="block level-3"></div>
+                    <div class="block level-4"></div>
+                  </div>
+                  <span>More</span>
+                </span>
+              </div>
+              <div class="heatmap-container">
+                <div class="heatmap-wrapper">
+                  <div id="heatmap" class="heatmap"></div>
+                  <div class="month-labels" id="monthLabels"></div>
                 </div>
-                <div class="heatmap-container">
-                    <div class="heatmap-wrapper">
-                        <div id="heatmap" class="heatmap"></div>
-                        <div class="month-labels" id="monthLabels"></div>
-                    </div>
-                </div>
-                <div id="futureTasks" class="future-task-section">
-                    <h3>Upcoming Events</h3>
-                    <div id="futureList" class="future-list"></div>
-                </div>
+              </div>
+              <div id="futureTasks" class="future-tasks-section">
+                <h3>Upcoming Events</h3>
+                <div id="futureList" class="future-list"></div>
+              </div>
             </aside>
-        </main>
+          </div>
+        </section>
+
+        <!-- TAB 2: Gamification (Optional Fun Mode) -->
+        <section id="gamification" class="tab-pane">
+          <div class="gamification-full">
+            <div class="level-overview">
+              <h2>Level <strong id="currentLevel">1</strong></h2>
+              <div class="xp-bar">
+                <div class="xp-fill" id="xpProgress"></div>
+                <span id="xpDisplay">0 / 100 XP</span>
+              </div>
+            </div>
+
+            <div class="streak-display">
+              Current Streak: <strong id="streakCount">0</strong> days
+            </div>
+
+            <div class="achievements-grid">
+              <div class="card">
+                <h3>Earned Badges</h3>
+                <div id="badgesList" class="badges-grid"></div>
+              </div>
+
+              <div class="card">
+                <h3>Active Challenges</h3>
+                <div id="activeChallenges"></div>
+              </div>
+
+              <div class="card">
+                <h3>Statistics</h3>
+                <div class="stats">
+                  <div>
+                    Total Tasks Completed: <strong id="totalTasks">0</strong>
+                  </div>
+                  <div>Total XP Earned: <strong id="totalXP">0</strong></div>
+                  <div>Longest Streak: <strong id="bestStreak">0</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
 
     <script src="logic.js"></script>
-</body>
+  </body>
 </html>
